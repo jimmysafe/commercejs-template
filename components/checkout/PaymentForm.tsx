@@ -10,10 +10,11 @@ import {
 } from '@stripe/react-stripe-js';
 import { loadStripe, Stripe, StripeElements } from '@stripe/stripe-js';
 import { useSelector } from '../../store';
-import { captureCheckout } from '../../queries';
+import { captureCheckout } from '../../commerce';
+import { LiveCheckout } from '../../commerce/types/checkout';
 
 type Props = {
-	liveCheckout: any;
+	liveCheckout: LiveCheckout;
 	checkoutId: string;
 };
 
@@ -40,8 +41,6 @@ const PaymentForm: FC<Props> = ({ liveCheckout, checkoutId }) => {
 		shipping_method,
 		city,
 	} = useSelector((state) => state.checkout);
-
-	console.log(liveCheckout);
 
 	const handleSubmit = async (e: SyntheticEvent, elements: StripeElements, stripe: Stripe) => {
 		e.preventDefault();
@@ -77,22 +76,22 @@ const PaymentForm: FC<Props> = ({ liveCheckout, checkoutId }) => {
 			fulfillment: {
 				shipping_method: shipping_method.value,
 			},
-			// payment: {
-			// 	gateway: 'test_gateway',
-			// 	card: {
-			// 		number: '4242 4242 4242 4242',
-			// 		expiry_month: '11',
-			// 		expiry_year: '2023',
-			// 		cvc: '123',
-			// 		postal_zip_code: '94107',
-			// 	},
-			// },
 			payment: {
-				gateway: 'stripe',
-				stripe: {
-					payment_method_id: paymentMethod.id,
+				gateway: 'test_gateway',
+				card: {
+					number: '4242 4242 4242 4242',
+					expiry_month: '11',
+					expiry_year: '2023',
+					cvc: '123',
+					postal_zip_code: '94107',
 				},
 			},
+			// payment: {
+			// 	gateway: 'stripe',
+			// 	stripe: {
+			// 		payment_method_id: paymentMethod.id,
+			// 	},
+			// },
 		};
 
 		await captureCheckout(checkoutId, orderData);

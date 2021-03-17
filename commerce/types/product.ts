@@ -1,26 +1,28 @@
-export type ProductPrice = {
+// -------------------------------------------- PRODUCT --------------------------------------------
+
+export interface Price {
 	raw: number;
 	formatted: string;
 	formatted_with_symbol: string;
 	formatted_with_code: string;
-};
+}
 
-export type ProductInventory = {
+export interface Inventory {
 	managed: boolean;
 	available: number;
-};
+}
 
-export type ProductMedia = {
+export interface Media {
 	type: string;
 	source: string;
-};
+}
 
-export type ProductSeo = {
+export interface Seo {
 	title: string;
 	description: string;
-};
+}
 
-export type ProductConditionals = {
+export interface Conditionals {
 	is_active: boolean;
 	is_free: boolean;
 	is_tax_exempt: boolean;
@@ -36,87 +38,62 @@ export type ProductConditionals = {
 	collects_shipping_address: boolean;
 	collects_billing_address: boolean;
 	collects_extrafields: boolean;
-};
+}
 
-export type ProductIs = {
+export interface Is {
 	active: boolean;
 	free: boolean;
 	tax_exempt: boolean;
 	pay_what_you_want: boolean;
 	inventory_managed: boolean;
 	sold_out: boolean;
-};
+}
 
-export type ProductHas = {
+export interface Has {
 	digital_delivery: boolean;
 	physical_delivery: boolean;
 	images: boolean;
 	video: boolean;
 	rich_embed: boolean;
-};
+}
 
-export type ProductCollects = {
+export interface Collects {
 	fullname: boolean;
 	shipping_address: boolean;
 	billing_address: boolean;
 	extrafields: boolean;
-};
+}
 
-export type ProductCheckoutUrl = {
+export interface CheckoutUrl {
 	checkout: string;
 	display: string;
-};
+}
 
-export type ProductIs2 = {
-	quantity_limited: boolean;
-};
-
-export type ProductOption = {
-	id: string;
-	name: string;
-	price: ProductPrice;
-	quantity: number;
-	is: ProductIs2;
-	assets: any[];
-	meta?: any;
-	created?: any;
-	updated: number;
-};
-
-export type ProductVariantGroup = {
-	id: string;
-	name: string;
-	meta?: any;
-	created?: any;
-	updated?: any;
-	options: ProductOption[];
-};
-
-export type ProductCategory = {
+export interface Category {
 	id: string;
 	slug: string;
 	name: string;
-};
+}
 
-export type ProductImageDimensions = {
+export interface ImageDimensions {
 	width: number;
 	height: number;
-};
+}
 
-export type ProductAsset = {
+export interface Asset {
 	id: string;
 	url: string;
 	is_image: boolean;
 	filename: string;
 	file_size: number;
 	file_extension: string;
-	image_dimensions: ProductImageDimensions;
+	image_dimensions: ImageDimensions;
 	meta: any[];
 	created_at: number;
 	updated_at: number;
-};
+}
 
-export type ProductData = {
+export interface Product {
 	id: string;
 	created: number;
 	updated: number;
@@ -124,42 +101,42 @@ export type ProductData = {
 	permalink: string;
 	name: string;
 	description: string;
-	price: ProductPrice;
-	inventory: ProductInventory;
-	media: ProductMedia;
+	price: Price;
+	inventory: Inventory;
+	media: Media;
 	sku: string;
 	sort_order: number;
-	seo: ProductSeo;
+	seo: Seo;
 	thank_you_url?: any;
 	meta?: any;
-	conditionals: ProductConditionals;
-	is: ProductIs;
-	has: ProductHas;
-	collects: ProductCollects;
-	checkout_url: ProductCheckoutUrl;
+	conditionals: Conditionals;
+	is: Is;
+	has: Has;
+	collects: Collects;
+	checkout_url: CheckoutUrl;
 	extrafields: any[];
-	variant_groups: ProductVariantGroup[];
-	categories: ProductCategory[];
-	assets: ProductAsset[];
+	variant_groups: any[];
+	categories: Category[];
+	assets: Asset[];
 	related_products: any[];
-};
+}
 
-export type ProductLinks = {};
+export type Links = {};
 
-export type ProductPagination = {
+export type Pagination = {
 	total: number;
 	count: number;
 	per_page: number;
 	current_page: number;
 	total_pages: number;
-	links: ProductLinks;
+	links: Links;
 };
 
-export type ProductMeta = {
-	pagination: ProductPagination;
+export type Meta = {
+	pagination: Pagination;
 };
 
-export type ProductRootData = {
-	data: ProductData[];
-	meta: ProductMeta;
+export type ProductQuery = {
+	data: Product[];
+	meta: Meta;
 };

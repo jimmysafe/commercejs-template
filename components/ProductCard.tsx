@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { FC } from 'react';
-import { ProductPrice } from '../types/products';
+import { Price } from '../commerce/types/product';
 
 export type ProductCardProps = {
 	id: string;
 	name: string;
-	price: ProductPrice;
+	price: Price;
 	permalink: string;
 	image_url: string;
 };

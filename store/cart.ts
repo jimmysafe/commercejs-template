@@ -1,10 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
-export const fetchUsers: any = createAsyncThunk('cart/fetchUsers', async () => {
-	const response = await fetch('https://jsonplaceholder.typicode.com/users');
-	const data = response.json();
-	return data;
-});
+import { createSlice } from '@reduxjs/toolkit';
 
 export const cart = createSlice({
 	name: 'cart',
@@ -35,14 +29,6 @@ export const cart = createSlice({
 			state.items_length = newCart.total_items;
 			state.total = newCart.subtotal.formatted_with_symbol;
 			state.items = newCart.line_items;
-		},
-	},
-	extraReducers: {
-		[fetchUsers.pending]: (state, action) => {
-			console.log('pending..', action);
-		},
-		[fetchUsers.fulfilled]: (state, action) => {
-			console.log('fullfilled..', action);
 		},
 	},
 });

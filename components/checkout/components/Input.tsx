@@ -1,12 +1,8 @@
 import { FC } from 'react';
 import { useDispatch } from '../../../store';
 import { updateInputValue } from '../../../store/checkout';
+import { Location } from '../../../commerce/types/checkout';
 import Select from 'react-select';
-
-type Location = {
-	value: string;
-	label: string;
-};
 
 type InputProps = {
 	label: string;

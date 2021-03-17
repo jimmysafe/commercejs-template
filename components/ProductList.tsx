@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { ProductData } from '../types/products';
+import { Product } from '../commerce/types/product';
 import ProductCard from './ProductCard';
 
 type Props = {
-	products: ProductData[];
+	products: Product[];
 };
 
 const ProductList: FC<Props> = ({ products }) => {

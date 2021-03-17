@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import commerce from '../commerce';
+import commerce from '../commerce/config';
 import { useDispatch } from '../store';
 import { initCart } from '../store/cart';
 import Cart from './cart/Cart';

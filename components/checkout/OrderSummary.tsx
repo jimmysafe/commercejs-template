@@ -1,15 +1,11 @@
 import { FC, useState, useRef, useEffect } from 'react';
 import { useDispatch } from '../../store';
 import { updateLiveCheckout } from '../../store/checkout';
-import { liveCheckoutWithDiscountCode } from '../../queries';
-
-type Location = {
-	value: string;
-	label: string;
-};
+import { liveCheckoutWithDiscountCode } from '../../commerce';
+import { LiveCheckout, Location } from '../../commerce/types/checkout';
 
 type Props = {
-	liveCheckout: any;
+	liveCheckout: LiveCheckout;
 	selectedShippingOption: Location;
 	checkoutId: string;
 };
@@ -26,8 +22,7 @@ const OrderSummary: FC<Props> = ({ liveCheckout, selectedShippingOption, checkou
 			if (discountCode) {
 				discountCodeRef.current.classList.remove('border', 'border-red-500');
 				const newCheckout = await liveCheckoutWithDiscountCode(checkoutId, discountCode);
-				console.log(newCheckout);
-				if (newCheckout.discount.length === 0) {
+				if (Array.isArray(newCheckout.discount)) {
 					discountCodeRef.current.value = '';
 					discountCodeRef.current.classList.add('border', 'border-red-500');
 				} else {
@@ -37,8 +32,6 @@ const OrderSummary: FC<Props> = ({ liveCheckout, selectedShippingOption, checkou
 			}
 		})();
 	}, [discountCode]);
-
-	console.log(discountCode);
 
 	return (
 		<div className='sticky top-20'>
@@ -100,7 +93,7 @@ const OrderSummary: FC<Props> = ({ liveCheckout, selectedShippingOption, checkou
 					<div className='flex justify-between items-center mb-2 text-sm'>
 						<span>Discount</span>
 						<span>
-							{liveCheckout.discount.length === 0
+							{Array.isArray(liveCheckout.discount)
 								? 'No discount code applied'
 								: liveCheckout.discount.amount_saved.formatted_with_symbol}
 						</span>

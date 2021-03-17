@@ -1,24 +1,30 @@
 import { FC, useEffect } from 'react';
-import { getRegions, getShippingOptions, liveCheckoutWithShipping } from '../../queries';
+import { getRegions, getShippingOptions, liveCheckoutWithShipping } from '../../commerce';
 import PaymentForm from './PaymentForm';
 import AddressForm from './AddressForm';
 import { useDispatch, useSelector } from '../../store';
 import { addRegions, addShippingOptions, updateLiveCheckout } from '../../store/checkout';
 import OrderSummary from './OrderSummary';
+import { Checkout, LiveCheckout, Location, ShippingOption } from '../../commerce/types/checkout';
 
 type CheckoutFormProps = {
-	checkout: any;
-	shippingCountries: any;
+	checkout: Checkout;
+	shippingCountries: Location[];
 };
 
 const CheckoutForm: FC<CheckoutFormProps> = ({ checkout, shippingCountries }) => {
 	const dispatch = useDispatch();
 
-	const { regions, shippingOptions } = useSelector((state) => state.checkout.config);
-	const selectedCountry = useSelector((state) => state.checkout.country);
-	const selectedRegion = useSelector((state) => state.checkout.region);
-	const selectedShippingOption = useSelector((state) => state.checkout.shipping_method);
-	const liveCheckout = useSelector((state) => state.checkout.live);
+	const regions: Location[] = useSelector((state) => state.checkout.config.regions);
+	const shippingOptions: ShippingOption[] = useSelector(
+		(state) => state.checkout.config.shippingOptions
+	);
+	const selectedCountry: Location = useSelector((state) => state.checkout.country);
+	const selectedRegion: Location = useSelector((state) => state.checkout.region);
+	const selectedShippingOption: ShippingOption = useSelector(
+		(state) => state.checkout.shipping_method
+	);
+	const liveCheckout: LiveCheckout = useSelector((state) => state.checkout.live);
 
 	// INIT CHECKOUT
 	useEffect(() => {
@@ -66,8 +72,6 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ checkout, shippingCountries }) =>
 	}, [selectedShippingOption]);
 
 	if (!liveCheckout) return <p>Loading..</p>;
-
-	console.log(checkout.live);
 
 	return (
 		<div className='flex justify-center items-start'>

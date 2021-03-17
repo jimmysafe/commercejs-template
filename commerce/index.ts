@@ -1,5 +1,5 @@
-import commerce from './commerce/config';
-import { Location, Checkout, LiveCheckout } from './commerce/types/checkout';
+import commerce from './config';
+import { Location, Checkout, LiveCheckout } from './types/checkout';
 
 export const createCheckout = async (cartId: string | string[]): Promise<Checkout> => {
 	const checkout: Checkout = await commerce.checkout.generateToken(cartId, { type: 'cart' });

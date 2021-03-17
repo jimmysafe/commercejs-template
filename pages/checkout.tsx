@@ -1,13 +1,15 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { createCheckout, getCheckoutShippingCountries } from '../queries';
+import { createCheckout, getCheckoutShippingCountries } from '../commerce';
 import CheckoutForm from '../components/checkout';
+import { Checkout } from '../commerce/types/checkout';
 
 type Props = {
-	checkout: any;
+	checkout: Checkout;
 	shippingCountries: any;
 };
 
 const CheckoutPage: NextPage<Props> = ({ checkout, shippingCountries }) => {
+	console.log(checkout);
 	return <CheckoutForm checkout={checkout} shippingCountries={shippingCountries} />;
 };
 

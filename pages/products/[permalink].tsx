@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
-import commerce from '../../commerce';
+import commerce from '../../commerce/config';
 import { useDispatch } from '../../store';
-import { ProductData } from '../../types/products';
+import { Product } from '../../commerce/types/product';
 import { addToCart } from '../../store/cart';
 
 type Props = {
-	product: ProductData;
+	product: Product;
 };
 
 const ProductPage: NextPage<Props> = ({ product }) => {
@@ -34,7 +34,7 @@ const ProductPage: NextPage<Props> = ({ product }) => {
 export default ProductPage;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-	const product: ProductData = await commerce.products.retrieve(params.permalink, {
+	const product: Product = await commerce.products.retrieve(params.permalink, {
 		type: 'permalink',
 	});
 	return {

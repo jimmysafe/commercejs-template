@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 import { useDispatch, useSelector } from '../../store';
-import commerce from '../../commerce';
+import commerce from '../../commerce/config';
 import { removeFromCart } from '../../store/cart';
 
 const Cart: FC = () => {
