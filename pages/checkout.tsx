@@ -1,11 +1,11 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { createCheckout, getCheckoutShippingCountries } from '../commerce';
 import CheckoutForm from '../components/checkout';
-import { Checkout } from '../commerce/types/checkout';
+import { Checkout, Country } from '../commerce/types/checkout';
 
 type Props = {
 	checkout: Checkout;
-	shippingCountries: any;
+	shippingCountries: Country[];
 };
 
 const CheckoutPage: NextPage<Props> = ({ checkout, shippingCountries }) => {
