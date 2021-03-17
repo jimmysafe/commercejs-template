@@ -2,11 +2,11 @@ import { FC, useState, useRef, useEffect } from 'react';
 import { useDispatch } from '../../store';
 import { updateLiveCheckout } from '../../store/checkout';
 import { liveCheckoutWithDiscountCode } from '../../commerce';
-import { LiveCheckout, Location } from '../../commerce/types/checkout';
+import { LiveCheckout, ShippingOption } from '../../commerce/types/checkout';
 
 type Props = {
 	liveCheckout: LiveCheckout;
-	selectedShippingOption: Location;
+	selectedShippingOption: ShippingOption;
 	checkoutId: string;
 };
 

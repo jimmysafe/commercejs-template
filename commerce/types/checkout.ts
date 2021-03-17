@@ -1,5 +1,11 @@
 // -------------------------------------------- CHECKOUT --------------------------------------------
-export interface Location {
+
+export interface Country {
+	value: string;
+	label: string | unknown;
+}
+
+export interface Region {
 	value: string;
 	label: string | unknown;
 }

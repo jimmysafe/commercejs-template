@@ -5,22 +5,28 @@ import AddressForm from './AddressForm';
 import { useDispatch, useSelector } from '../../store';
 import { addRegions, addShippingOptions, updateLiveCheckout } from '../../store/checkout';
 import OrderSummary from './OrderSummary';
-import { Checkout, LiveCheckout, Location, ShippingOption } from '../../commerce/types/checkout';
+import {
+	Checkout,
+	LiveCheckout,
+	Country,
+	ShippingOption,
+	Region,
+} from '../../commerce/types/checkout';
 
 type CheckoutFormProps = {
 	checkout: Checkout;
-	shippingCountries: Location[];
+	shippingCountries: Country[];
 };
 
 const CheckoutForm: FC<CheckoutFormProps> = ({ checkout, shippingCountries }) => {
 	const dispatch = useDispatch();
 
-	const regions: Location[] = useSelector((state) => state.checkout.config.regions);
+	const regions: Region[] = useSelector((state) => state.checkout.config.regions);
 	const shippingOptions: ShippingOption[] = useSelector(
 		(state) => state.checkout.config.shippingOptions
 	);
-	const selectedCountry: Location = useSelector((state) => state.checkout.country);
-	const selectedRegion: Location = useSelector((state) => state.checkout.region);
+	const selectedCountry: Country = useSelector((state) => state.checkout.country);
+	const selectedRegion: Region = useSelector((state) => state.checkout.region);
 	const selectedShippingOption: ShippingOption = useSelector(
 		(state) => state.checkout.shipping_method
 	);

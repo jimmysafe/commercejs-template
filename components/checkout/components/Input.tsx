@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { useDispatch } from '../../../store';
 import { updateInputValue } from '../../../store/checkout';
-import { Location } from '../../../commerce/types/checkout';
+import { Country, Region, ShippingOption } from '../../../commerce/types/checkout';
 import Select from 'react-select';
 
 type InputProps = {
 	label: string;
 	type: string;
 	id: string;
-	options?: Location[];
+	options?: Country[] | Region[] | ShippingOption[];
 	placeholder?: string;
 	isDisabled?: boolean;
 };
@@ -16,7 +16,7 @@ type InputProps = {
 const Input: FC<InputProps> = ({ label, id, type, options, placeholder, isDisabled }) => {
 	const dispatch = useDispatch();
 
-	const handleChange = (key: string, value: string | Location) => {
+	const handleChange = (key: string, value: string | Country | Region | ShippingOption) => {
 		dispatch(
 			updateInputValue({
 				key,

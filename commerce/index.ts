@@ -1,15 +1,15 @@
 import commerce from './config';
-import { Location, Checkout, LiveCheckout } from './types/checkout';
+import { Country, Region, Checkout, LiveCheckout, ShippingOption } from './types/checkout';
 
 export const createCheckout = async (cartId: string | string[]): Promise<Checkout> => {
 	const checkout: Checkout = await commerce.checkout.generateToken(cartId, { type: 'cart' });
 	return checkout;
 };
 
-export const getCheckoutShippingCountries = async (checkoutId: string): Promise<Location[]> => {
+export const getCheckoutShippingCountries = async (checkoutId: string): Promise<Country[]> => {
 	const data = await commerce.services.localeListShippingCountries(checkoutId);
 
-	const shippingCountries: Location[] = Object.entries(data.countries).map(([code, name]) => ({
+	const shippingCountries: Country[] = Object.entries(data.countries).map(([code, name]) => ({
 		value: code,
 		label: name,
 	}));
@@ -17,9 +17,9 @@ export const getCheckoutShippingCountries = async (checkoutId: string): Promise<
 	return shippingCountries;
 };
 
-export const getRegions = async (countryCode: string): Promise<Location[]> => {
+export const getRegions = async (countryCode: string): Promise<Region[]> => {
 	const data = await commerce.services.localeListSubdivisions(countryCode);
-	const subdivisions: Location[] = Object.entries(data.subdivisions).map(([code, name]) => ({
+	const subdivisions: Region[] = Object.entries(data.subdivisions).map(([code, name]) => ({
 		value: code,
 		label: name,
 	}));
@@ -31,12 +31,12 @@ export const getShippingOptions = async (
 	checkoutId: string,
 	countryCode: string,
 	regionCode: string
-): Promise<Location[]> => {
+): Promise<ShippingOption[]> => {
 	const data = await commerce.checkout.getShippingOptions(checkoutId, {
 		country: countryCode,
 		region: regionCode,
 	});
-	const shippingOptions: Location[] = data.map((option: any) => {
+	const shippingOptions: ShippingOption[] = data.map((option: any) => {
 		return {
 			value: option.id,
 			label: option.description + ' - ' + option.price.formatted_with_symbol,

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import Input from './components/Input';
-import { ShippingOption, Location } from '../../commerce/types/checkout';
+import { ShippingOption, Country, Region } from '../../commerce/types/checkout';
 
 type Props = {
-	shippingCountries: Location[];
-	regions: Location[];
+	shippingCountries: Country[];
+	regions: Region[];
 	selectedShippingOption: ShippingOption;
 	shippingOptions: ShippingOption[];
 };
