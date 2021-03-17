@@ -1,9 +1,9 @@
 import commerce from '../commerce/config';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, FC } from 'react';
 import { Category, CategoryQuery } from '../commerce/types/categories';
 import { useRouter } from 'next/router';
 
-export default function Home() {
+const Categories: FC = () => {
 	const router = useRouter();
 	const [categories, setCategories] = useState<Category[]>([]);
 
@@ -13,7 +13,6 @@ export default function Home() {
 			.then((categories: CategoryQuery) => setCategories(categories.data))
 			.catch((err: any) => console.log(err));
 	}, []);
-
 	return (
 		<div className='py-8 flex'>
 			{categories.map((cat) => (
@@ -27,4 +26,6 @@ export default function Home() {
 			))}
 		</div>
 	);
-}
+};
+
+export default Categories;

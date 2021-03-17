@@ -9,7 +9,6 @@ type Props = {
 };
 
 const CheckoutPage: NextPage<Props> = ({ checkout, shippingCountries }) => {
-	console.log(checkout);
 	return <CheckoutForm checkout={checkout} shippingCountries={shippingCountries} />;
 };
 

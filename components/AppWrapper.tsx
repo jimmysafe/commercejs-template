@@ -3,6 +3,7 @@ import commerce from '../commerce/config';
 import { useDispatch } from '../store';
 import { initCart } from '../store/cart';
 import Cart from './cart/Cart';
+import Categories from './Categories';
 
 const AppWrapper: FC = ({ children }) => {
 	const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const AppWrapper: FC = ({ children }) => {
 	return (
 		<main className='container mx-auto'>
 			<Cart />
+			<Categories />
 			{children}
 		</main>
 	);
